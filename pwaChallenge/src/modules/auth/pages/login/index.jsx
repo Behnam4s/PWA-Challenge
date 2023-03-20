@@ -20,6 +20,10 @@ function Login() {
         formState: { errors },
     } = useForm({
         resolver: loginResolver,
+        defaultValues:{
+            nationalCode: userData.nationalCode,
+            mobileNumber: userData.mobileNumber,
+        },
     });
     console.log(userData)
     const onSubmit = (data) =>{
