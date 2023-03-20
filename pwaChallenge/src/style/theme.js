@@ -7,6 +7,11 @@ const fontFamily = [
 
 const theme = createTheme({
     direction: 'rtl',
+    palette: {
+        background: {
+            default: "#F2F2F3"
+        }
+    },
     typography: {
       fontFamily ,
     },

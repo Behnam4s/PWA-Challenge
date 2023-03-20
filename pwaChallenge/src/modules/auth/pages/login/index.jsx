@@ -35,8 +35,8 @@ function Login() {
   return (
     <Box component={'section'} sx={{ height: '100%'}}>
       <Grid container justifyContent={'center'} alignItems={'center'} sx={{height: '100%'}}>
-        <Grid item xs={12} container flexDirection={'column'} alignItems={'center'}>
-          <Stack spacing={1} sx={{ width: '343px'}}>
+        <Grid item xs={12} container flexDirection={'column'} alignItems={'center'} px={1}>
+          <Stack spacing={1} sx={{ width: {lg:'30%', xs: '100%'}}}>
              <Grid container justifyContent={'center'}>
                  <img src={Logo} alt={'addUserIcon'} width= {'108px'} height= {'108px'} />
              </Grid>
@@ -59,10 +59,10 @@ function Login() {
                 noValidate
                 onSubmit={handleSubmit(onSubmit)}
                 autoComplete={'off'}
-                sx={{width:'60%'}}
+                sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}
                 mt={2}
             >
-               <Stack spacing={2} alignItems={'center'}>
+               <Stack spacing={2} sx={{ width:{ xs: '100%', lg: '30%'}}} alignItems={'center'}>
                    <TextField
                        // id="mobileNumber"
                        name={'mobileNumber'}
@@ -70,11 +70,12 @@ function Login() {
                        placeholder="شماره همراه"
                        control={control}
                        schema={loginSchema}
-                       error={errors}
+                       fullWidth
+                       error={errors?.mobileNumber}
                        {...register("mobileNumber")}
                        helperText={errors?.mobileNumber?.message}
                        sx={{
-                           borderRadius: '16px', backgroundColor: '#E5E6E6', width:'38%', color: '#FFF', dir: 'rtl',
+                           borderRadius: '16px', backgroundColor: '#E5E6E6', color: '#FFF',
                            "& .MuiOutlinedInput-notchedOutline": {
                                border: 'none',
                            },
@@ -88,10 +89,11 @@ function Login() {
                        {...register("nationalCode")}
                        control={control}
                        schema={loginSchema}
-                       error={errors}
+                       fullWidth
+                       error={errors?.nationalCode}
                        helperText={errors?.nationalCode?.message}
                        sx={{
-                           borderRadius: '16px', backgroundColor: '#E5E6E6', width:'38%',
+                           borderRadius: '16px', backgroundColor: '#E5E6E6',
                            "& .MuiOutlinedInput-notchedOutline": {
                                label: 'red',
                                border: 'none',
@@ -101,12 +103,11 @@ function Login() {
                    <Button
                        variant={'contained'}
                        type={'submit'}
+                       fullWidth
                        sx={{
-                           width:'38%',
+
                            borderRadius: '16px',
                            padding: '12px 16px',
-                           backgroundColor: '#E5E6E6',
-                           color: '#94989C',
                            fontWeight: 700,
                    }}
                    >

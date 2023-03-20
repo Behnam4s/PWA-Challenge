@@ -1,14 +1,16 @@
 import { atom } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
+// import { recoilPersist } from 'recoil-persist';
 
 
-const { persistAtom } = recoilPersist({
-    key: 'UserInfo',
-});
+// use for save data in localStorage
+
+// const { persistAtom } = recoilPersist({
+//     key: 'UserInfo',
+// });
 const userDataState = atom({
     key: 'UserInfo',
     default: [],
-    effects_UNSTABLE: [persistAtom],
+    // effects_UNSTABLE: [persistAtom],
 });
 
 export default userDataState;

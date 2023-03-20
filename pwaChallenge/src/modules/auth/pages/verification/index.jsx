@@ -17,18 +17,28 @@ function Verification() {
     control,
     reset,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty, dirtyFields, isValid },
   } = useForm({
     resolver: verificationResolver,
+    mode: 'all',
+      defaultValues:{
+        firstNumber: null,
+      },
   });
+
   const firstNum = watch('firstNumber');
   const secondNum = watch('secondNumber');
   const thirdNum = watch('thirdNumber');
   const fourthNum = watch('fourthNumber');
-    const [counter, setCounter] = React.useState(59);
+    // console.log(errors)
+    // console.log('isDirty',isDirty)
+    // console.log('dirtyFields',dirtyFields)
+    console.log('isValid',isValid)
+    const [counter, setCounter] = useState(59);
+    const [verifyCodeLoading, setVerifyCodeLoading] = useState(false);
     useEffect(() => {
         counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-    }, [counter]);
+    }, []);
 
     const resend = () => {
         setCounter((t) => !t);
@@ -36,8 +46,21 @@ function Verification() {
     const editNumber = () =>{
         navigate('../login')
     }
-  const onSubmit = (data) =>{
-      console.log(data)
+    useEffect(()=>{
+        if (!isValid){
+            alert('کد وارد شده صحیح نیست')
+        }else{
+            onSubmit();
+        }
+    },[isValid])
+
+    // fake verification API Call
+  const onSubmit = () =>{
+        setVerifyCodeLoading(true);
+      setTimeout(()=>{
+          setVerifyCodeLoading(false)
+          navigate('../../../customer/panel/home')
+      },2000)
   }
   return (
       <Box component={'section'} sx={{ height: '100%'}}>
@@ -71,13 +94,16 @@ function Verification() {
                   <Stack direction={'row'} spacing={2} justifyContent={'center'}>
                       <TextField
                           name={'firstNumber'}
-                          type={'number'}
+                          type={'tel'}
                           error={errors}
+
+                          inputProps={{ maxlength:1, style: { textAlign: 'center' }}}
                           {...register("firstNumber")}
                           helperText={errors?.mobileNumber?.message}
                           sx={{
-                              borderRadius: '25px 25px 0 0', backgroundColor: '#E5E6E6', width:'5%', color: '#FFF', dir: 'rtl',
+                              borderRadius: '25px 25px 0 0', backgroundColor: '#E5E6E6', width:'5%', color: '#FFF',
                               marginLeft: '18px',
+                              background: 'red',
                               "& .MuiOutlinedInput-notchedOutline": {
                                   border: 'none',
                               },
@@ -86,12 +112,13 @@ function Verification() {
                       <TextField
                           // id="mobileNumber"
                           name={'secondNumber'}
-                          type={'number'}
+                          type={'tell'}
                           error={errors}
+                          inputProps={{ maxlength:1, style: { textAlign: 'center' }}}
                           {...register("secondNumber")}
                           helperText={errors?.mobileNumber?.message}
                           sx={{
-                              borderRadius: '25px 25px 0 0', backgroundColor: '#E5E6E6', width:'5%', color: '#FFF', dir: 'rtl',
+                              borderRadius: '25px 25px 0 0', backgroundColor: '#E5E6E6', width:'5%', color: '#FFF',
                               "& .MuiOutlinedInput-notchedOutline": {
                                   border: 'none',
                               },
@@ -100,12 +127,13 @@ function Verification() {
                       <TextField
                           // id="mobileNumber"
                           name={'thirdNumber'}
-                          type={'number'}
+                          type={'tell'}
                           error={errors}
+                          inputProps={{ maxlength:1, style: { textAlign: 'center' }}}
                           {...register("thirdNumber")}
                           helperText={errors?.mobileNumber?.message}
                           sx={{
-                              borderRadius: '25px 25px 0 0', backgroundColor: '#E5E6E6', width:'5%', color: '#FFF', dir: 'rtl',
+                              borderRadius: '25px 25px 0 0', backgroundColor: '#E5E6E6', width:'5%', color: '#FFF',
                               "& .MuiOutlinedInput-notchedOutline": {
                                   border: 'none',
                               },
@@ -114,8 +142,9 @@ function Verification() {
                       <TextField
                           // id="mobileNumber"
                           name={'fourthNumber'}
-                          type={'number'}
+                          type={'tell'}
                           error={errors}
+                          inputProps={{ maxlength:1, style: { textAlign: 'center' }}}
                           {...register("fourthNumber")}
                           helperText={errors?.mobileNumber?.message}
                           sx={{
