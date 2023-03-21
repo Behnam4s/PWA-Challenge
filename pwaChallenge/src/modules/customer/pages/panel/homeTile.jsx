@@ -14,6 +14,7 @@ import Doctor from '../../../../assets/images/doctor.png';
 import Insure from '../../../../assets/images/insure.png';
 import Receipt from '../../../../assets/images/reciep.png';
 import Transfer from '../../../../assets/images/transfer.png';
+import BottomAppBar from "../../../../components/navBar/index.jsx";
 
 function HomeTile() {
     const serviceList= [
@@ -24,6 +25,7 @@ function HomeTile() {
         },
         {
             pic: Flight,
+            // text: 'لانژ اختصاصی فرودگاه',
             text: 'لانژ اختصاصی فرودگاه',
         },
         {
@@ -36,8 +38,7 @@ function HomeTile() {
         },
         {
             pic: Insure,
-            text: 'نرخ و شرایط\n' +
-                'سپرده',
+            text: 'نرخ و شرایط سپرده',
         },
         {
             pic: Transfer,
@@ -70,7 +71,7 @@ function HomeTile() {
     ]
   return (
     <Box component={'section'} p={4}>
-      <Grid container >
+      <Grid container mb={2}>
         <Grid item xs={12}>
             <Stack spacing={1}>
                 <Typography variant={'h5'} fontWeight={500} color={'info.main'}>{'بهنام مقدسیان'}</Typography>
@@ -126,6 +127,7 @@ function HomeTile() {
               </Grid>
           </Grid>
       </Grid>
+        <BottomAppBar/>
     </Box>
   )
 }

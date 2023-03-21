@@ -1,5 +1,5 @@
 import React from 'react'
-import {Avatar, Box, Button, Grid, Stack, Typography} from "@mui/material";
+import {Avatar, Box, Button, Grid, Stack, Typography, useMediaQuery} from "@mui/material";
 import Profile from '../../../../assets/images/gianluigibuffon.jpg';
 import {Call, RateReview} from "@mui/icons-material";
 import Car from '../../../../assets/images/car.png';
@@ -14,6 +14,7 @@ import Doctor from '../../../../assets/images/doctor.png';
 import Insure from '../../../../assets/images/insure.png';
 import Receipt from '../../../../assets/images/reciep.png';
 import Transfer from '../../../../assets/images/transfer.png';
+import BottomAppBar from "../../../../components/navBar/index.jsx";
 
 function HomeTile() {
     const serviceList= [
@@ -79,9 +80,25 @@ function HomeTile() {
             desc: 'تحویل صندوق امانات به شما در شعبه دلخواه شما در تهران، مشهد، اصفهان و شیراز',
         },
     ]
-  return (
+    const isTablet = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    const serviceStyle = {
+        width: '100%',
+    }
+    const callButton = {
+        width: '49%',
+        backgroundColor: '#113A5F',
+        color: '#66B1E2',
+        borderRadius: '16px',
+        fontSize: isTablet? '11px': '14px',
+    }
+    const messageButton = {
+        width: '49%',
+        borderRadius: '16px',
+        fontSize: isTablet? '11px': '14px',
+    }
+    return (
     <Box component={'section'} p={4}>
-      <Grid container >
+      <Grid container mb={2}>
         <Grid item xs={12}>
             <Stack spacing={1}>
                 <Typography variant={'h5'} fontWeight={500} color={'info.main'}>{'بهنام مقدسیان'}</Typography>
@@ -97,16 +114,20 @@ function HomeTile() {
                              height={'65px'}
                              component={'img'}
                              src={Profile}
-
                              sx={{ border: 2, borderColor: '#CC9D5F', borderRadius: '0 0 30px 30px'}}
                          />
                          <Typography variant={'h6'} fontWeight={500} mr={1}>{'بهنام مقدسیان'}</Typography>
                      </Stack>
                      <Stack direction={'row'} justifyContent={'space-between'}>
-                         <Button variant="contained" sx={{ width: '49%', borderRadius: '16px'}}>{'ارسال پیام'}</Button>
                          <Button
                              variant="contained"
-                             sx={{ width: '49%', backgroundColor: '#113A5F', color: '#66B1E2', borderRadius: '16px'}}
+                             sx={messageButton}
+                         >
+                             {'ارسال پیام'}
+                         </Button>
+                         <Button
+                             variant="contained"
+                             sx={callButton}
                              startIcon={<Call sx={{ marginLeft: '10px', color: '#66B1E2'}} />}
                          >{'تماس امن'}</Button>
                      </Stack>
@@ -122,15 +143,17 @@ function HomeTile() {
                       {
                           serviceList?.map( items=> (
                           <Grid item container  alignItems={'center'} justifyContent={'center'} my={2} xs={12} sx={{ cursor: 'pointer'}}>
-                              <Box
-                                  width={'48px'}
-                                  height={'48px'}
-                                  component={'img'}
-                                  src={items.pic}
-                              />
-                              <Stack spacing={1} mr={3}>
-                                  <Typography fontSize={'16px'} fontWeight={500}>{items.title}</Typography>
-                                  <Typography fontSize={'13px'} fontWeight={400}>{items.desc}</Typography>
+                              <Stack direction={'row'} sx={isTablet && serviceStyle }>
+                                  <Box
+                                      width={'48px'}
+                                      height={'48px'}
+                                      component={'img'}
+                                      src={items.pic}
+                                  />
+                                  <Stack spacing={1} mr={3} flexGrow={1}>
+                                      <Typography fontSize={'16px'} fontWeight={500}>{items.title}</Typography>
+                                      <Typography fontSize={'13px'} fontWeight={400}>{items.desc}</Typography>
+                                  </Stack>
                               </Stack>
                           </Grid>
                           ))
@@ -140,6 +163,7 @@ function HomeTile() {
               </Grid>
           </Grid>
       </Grid>
+        <BottomAppBar/>
     </Box>
   )
 }
