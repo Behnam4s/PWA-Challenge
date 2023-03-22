@@ -1,11 +1,11 @@
 import React from 'react'
-import CustomerRoute from "./routes";
 import {Box} from "@mui/material";
+import {Outlet } from "react-router-dom";
 
 function Customer() {
   return (
     <Box>
-      <CustomerRoute/>
+        <Outlet />
     </Box>
   )
 }

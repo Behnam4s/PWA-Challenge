@@ -3,8 +3,6 @@ import {Box, Button, FilledInput, Grid, Input, Stack, TextField, Typography} fro
 import { useForm } from 'react-hook-form';
 import { loginSchema, loginResolver } from '../../schema/login';
 import Logo from '../../../../assets/images/logo.png';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as yup from "yup";
 import {useRecoilState} from "recoil";
 import userDataState from "../../store/userData";
 import {useNavigate} from "react-router-dom";
@@ -12,6 +10,13 @@ import {useNavigate} from "react-router-dom";
 function Login() {
     const [userData, setUserData] = useRecoilState(userDataState);
     const navigate = useNavigate();
+    const inputStyle =
+        {
+            borderRadius: '16px', backgroundColor: '#E5E6E6', color: '#FFF',
+            "& .MuiOutlinedInput-notchedOutline": {
+                border: 'none',
+            },
+        }
     const {
         handleSubmit,
         register,
@@ -29,8 +34,6 @@ function Login() {
     const onSubmit = (data) =>{
         setUserData(data);
         navigate('../verification')
-
-        // console.log(data);
     }
   return (
     <Box component={'section'} sx={{ height: '100%'}}>
@@ -64,7 +67,6 @@ function Login() {
             >
                <Stack spacing={2} sx={{ width:{ xs: '100%', lg: '30%'}}} alignItems={'center'}>
                    <TextField
-                       // id="mobileNumber"
                        name={'mobileNumber'}
                        type={'number'}
                        placeholder="شماره همراه"
@@ -74,15 +76,9 @@ function Login() {
                        error={errors?.mobileNumber}
                        {...register("mobileNumber")}
                        helperText={errors?.mobileNumber?.message}
-                       sx={{
-                           borderRadius: '16px', backgroundColor: '#E5E6E6', color: '#FFF',
-                           "& .MuiOutlinedInput-notchedOutline": {
-                               border: 'none',
-                           },
-                       }}
+                       sx={inputStyle}
                    />
                    <TextField
-                       // id="nationalCode"
                        type={'number'}
                        name={'nationalCode'}
                        placeholder="کد ملی"
@@ -92,13 +88,7 @@ function Login() {
                        fullWidth
                        error={errors?.nationalCode}
                        helperText={errors?.nationalCode?.message}
-                       sx={{
-                           borderRadius: '16px', backgroundColor: '#E5E6E6',
-                           "& .MuiOutlinedInput-notchedOutline": {
-                               label: 'red',
-                               border: 'none',
-                           },
-                       }}
+                       sx={inputStyle}
                    />
                    <Button
                        variant={'contained'}
@@ -115,15 +105,6 @@ function Login() {
                    </Button>
                </Stack>
             </Box>
-            {/*<form onSubmit={handleSubmit(onSubmit)}>*/}
-            {/*    <input {...register("firstName")} />*/}
-            {/*    <p>{errors.firstName?.message}</p>*/}
-
-            {/*    <input {...register("age")} />*/}
-            {/*    <p>{errors.age?.message}</p>*/}
-
-            {/*    <input type="submit" />*/}
-            {/*</form>*/}
         </Grid>
       </Grid>
     </Box>
