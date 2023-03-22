@@ -111,7 +111,7 @@ function HomeTile() {
                   <Grid container>
                       {
                           serviceList?.map( items=> (
-                          <Grid item container flexDirection={'column'} alignItems={'center'} my={2} xs={4} sx={{ cursor: 'pointer'}}>
+                          <Grid item container flexDirection={'column'} alignItems={'center'} my={2} mx={1} xs={4} sx={{ cursor: 'pointer'}}>
                               <Box
                                   width={'40px'}
                                   height={'40px'}

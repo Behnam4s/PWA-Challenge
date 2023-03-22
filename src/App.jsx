@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
-import {Box, Button, CssBaseline, ThemeProvider, Typography} from "@mui/material";
+import {Box, CssBaseline, ThemeProvider} from "@mui/material";
 import theme from './style/theme'
 import AppRoute from "./routes/index.jsx";
 
